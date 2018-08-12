@@ -1,17 +1,42 @@
 version: '3'
 
 services:
-  dcs-db-dev:
-    image: mysql:8.0
-    ports:
-      - 3306:3306
+
+  backend:
+    image: node-typestack-starter
     environment:
-      MYSQL_ROOT_PASSWORD: root_pass
-      MYSQL_USER: user
-      MYSQL_PASSWORD: password
-      MYSQL_DATABASE: dcs
+    - SERVICE_PORTS=3000
+    links:
+    - mongo
+    depends_on:
+    - mongo
+
+  grafana:
+    image: grafana/grafana
+    ports:
+    - "3001:3000"
+    links:
+    - prometheus
+  prometheus:
+    build: prometheus
+    ports:
+    - "9090:9090"
+
+   haproxy:
+    image: dockercloud/haproxy
+    links:
+     - backend
+    ports:
+     - "3000:80"
     volumes:
-      - dcs_data_dev:/var/lib/mysql
+     - /var/run/docker.sock:/var/run/docker.sock
+
+    mongo:
+      image: mongo:3.4.2
+      ports:
+      - "27017:27017"
+      volumes:
+      - ./data/db:/data/db
 
 volumes:
   dcs_data_dev:

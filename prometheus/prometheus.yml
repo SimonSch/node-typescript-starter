@@ -2,11 +2,11 @@
 global:
   scrape_interval:     5s # Set the scrape interval to every 5 seconds.
   external_labels:
-    monitor: 'microservices-monitor'
+    monitor: 'node-typestack-starter'
 
 scrape_configs:
-  - job_name: 'webshop-app'
+  - job_name: 'backend'
     scrape_interval: 5s
     metrics_path: '/actuator/prometheus'
     static_configs:
-      - targets: ['webshop:8080']
+      - targets: ['backend:3000']
