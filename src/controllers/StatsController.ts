@@ -1,15 +1,17 @@
-import { Get, JsonController } from 'routing-controllers';
-import { Logger } from '../decorators/Logger';
-import { ILogger } from '../interfaces/ILogger';
+import {Get, JsonController} from 'routing-controllers';
+import {Logger} from '../decorators/Logger';
+import {ILogger} from '../interfaces/ILogger';
+import * as Prometheus from 'prom-client';
 
-@JsonController('/stats')
+@JsonController('/metrics')
 export class StatsController {
 
-  @Logger()
-  private readonly logger: ILogger;
+    @Logger()
+    private readonly logger: ILogger;
 
-  @Get('/')
-  public readonly getStats = () => {
-    return { foo: 'bar' };
-  }
+    @Get('/')
+    public readonly getStats = () => {
+        return Prometheus.register.metrics();
+    };
+
 }

@@ -5,7 +5,7 @@ import * as fs from 'fs';
 import { ILogger } from '../interfaces/ILogger';
 import { Logger } from '../decorators/Logger';
 
-export const MysqlDbServiceImpl = new Token<MysqlService>();
+export const MongoDbServiceImpl = new Token<MongoService>();
 
 interface IDbFields {
   username: string;
@@ -20,8 +20,8 @@ interface IDbCredentials {
   production: IDbFields;
 }
 
-@Service(MysqlDbServiceImpl)
-export class MysqlService implements IDbConfig {
+@Service(MongoDbServiceImpl)
+export class MongoService implements IDbConfig {
 
   private readonly configPath: string;
 
@@ -46,7 +46,7 @@ export class MysqlService implements IDbConfig {
     this.logger.verbose('Initializing database with', config);
 
     return {
-      type: 'mysql',
+      type: 'mongodb',
       synchronize: true,
       logging: false,
       host: config.host,

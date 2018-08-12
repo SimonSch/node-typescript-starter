@@ -6,12 +6,12 @@ import { useContainer } from 'routing-controllers';
 import { Application } from './config/Application';
 import { IDbConfig } from './interfaces/IDbConfig';
 import { WinstonLoggerImpl } from './services/WinstonLoggerImpl';
-import { MysqlDbServiceImpl } from './services/MysqlDbServiceImpl';
+import { MongoDbServiceImpl } from './services/MongoDbServiceImpl';
 
 useContainer(Container);
 useContainerOrm(Container);
 
-const dbConfigService: IDbConfig = Container.get(MysqlDbServiceImpl);
+const dbConfigService: IDbConfig = Container.get(MongoDbServiceImpl);
 const logger = Container.get(WinstonLoggerImpl);
 
 createConnection(dbConfigService.getDbConfig())
