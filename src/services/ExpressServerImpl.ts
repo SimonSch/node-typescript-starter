@@ -10,6 +10,7 @@ import * as expressWinston from 'express-winston';
 import * as winston from 'winston';
 import * as express from 'express';
 import * as Prometheus from 'prom-client';
+import {HelloController} from '../controllers/HelloController';
 
 export const ExpressServerImpl = new Token<IServer>();
 
@@ -40,7 +41,8 @@ export class ExpressImpl implements IServer {
 
         useExpressServer(this.Instance, {
             controllers: [
-                StatsController
+                StatsController,
+                HelloController
             ]
         });
     }

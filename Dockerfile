@@ -1,5 +1,6 @@
 FROM node:8
 WORKDIR /usr/src/app
-COPY server .
+COPY index .
+COPY dbConfig.json .
 EXPOSE 3000
-CMD [ "./server"]
+CMD [ "./index"]

@@ -38,7 +38,7 @@
     "build": "node_modules/.bin/tsc",
     "build:watch": "npm run build -- -w",
     "lint": "tslint --project \"tsconfig.json\"",
-    "build_app": "pkg server.js -t node8-linux",
-    "build_docker": "yarn run build && docker build -t node-typestack-starter/build ."
+    "build_app": "pkg index.js -t node8-linux",
+    "build_docker": "yarn run build && yarn run build_app && docker build -t node-typestack-starter ."
   }
 }

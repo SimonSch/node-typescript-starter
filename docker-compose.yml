@@ -1,4 +1,4 @@
-version: '3'
+version: '3.1'
 
 services:
 
@@ -6,10 +6,12 @@ services:
     image: node-typestack-starter
     environment:
     - SERVICE_PORTS=3000
+    - NODE_ENV=production
     links:
     - mongo
     depends_on:
     - mongo
+
 
   grafana:
     image: grafana/grafana
@@ -22,21 +24,23 @@ services:
     ports:
     - "9090:9090"
 
-   haproxy:
+  haproxy:
     image: dockercloud/haproxy
     links:
-     - backend
+    - backend
     ports:
-     - "3000:80"
+    - "3000:80"
     volumes:
-     - /var/run/docker.sock:/var/run/docker.sock
+    - /var/run/docker.sock:/var/run/docker.sock
 
-    mongo:
-      image: mongo:3.4.2
-      ports:
-      - "27017:27017"
-      volumes:
-      - ./data/db:/data/db
+  mongo:
+    image: mongo
+    ports:
+    - "27017:27017"
+    volumes:
+    - ./data/db:/data/db
+    environment:
+      ["MONGODB_PRIMARY_ROOT_USER=mongodb"]
 
 volumes:
   dcs_data_dev:
