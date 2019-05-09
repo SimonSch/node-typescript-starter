@@ -22,3 +22,6 @@ This is the typestack starter project
   }
 }
 ```
+
+
+TODO: add tests https://hackernoon.com/a-crash-course-on-testing-with-node-js-6c7428d3da02 
