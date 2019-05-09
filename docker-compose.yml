@@ -12,24 +12,35 @@ services:
     depends_on:
     - mongo
 
-
   grafana:
     image: grafana/grafana
     ports:
     - "3001:3000"
     links:
     - prometheus
+
   prometheus:
     build: prometheus
+    links:
+    - haproxy_exporter
     ports:
     - "9090:9090"
 
+  haproxy_exporter:
+    image: prom/haproxy-exporter
+    links: 
+    - haproxy
+    ports: 
+    - "9101:9101" 
+    command: --haproxy.scrape-uri="http://stats:stats@haproxy:1936/haproxy?stats;csv"
+     
   haproxy:
     image: dockercloud/haproxy
     links:
     - backend
     ports:
     - "3000:80"
+    - "1936:1936"
     volumes:
     - /var/run/docker.sock:/var/run/docker.sock
 
