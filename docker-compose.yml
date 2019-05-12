@@ -33,6 +33,16 @@ services:
     ports: 
     - "9101:9101" 
     command: --haproxy.scrape-uri="http://stats:stats@haproxy:1936/haproxy?stats;csv"
+
+  mongodb_exporter:
+    image: xendera/mongodb-exporter
+    links:
+    - haproxy
+    - mongo
+    ports:
+    - "9216:9216"
+    environment:
+      ["MONGODB_URL=mongo"]  
      
   haproxy:
     image: dockercloud/haproxy
