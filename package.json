@@ -13,7 +13,7 @@
     "reflect-metadata": "^0.1.12",
     "routing-controllers": "^0.7.7",
     "typedi": "^0.7.2",
-    "typeorm": "^0.2.3",
+    "typeorm": "^0.2.25",
     "winston": "^2.4.2"
   },
   "devDependencies": {
