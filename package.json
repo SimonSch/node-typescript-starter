@@ -5,7 +5,7 @@
   "author": "Simon Schroffner",
   "license": "MIT",
   "dependencies": {
-    "aws-sdk": "^2.229.1",
+    "aws-sdk": "^2.814.0",
     "express": "^4.16.3",
     "express-winston": "^2.5.1",
     "mongoose": "^5.2.7",
